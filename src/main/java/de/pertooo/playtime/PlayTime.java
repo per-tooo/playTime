@@ -1,5 +1,6 @@
 package de.pertooo.playtime;
 
+import de.pertooo.playtime.commands.playTimeCommand;
 import de.pertooo.playtime.events.onPlayerJoin;
 import de.pertooo.playtime.events.onPlayerQuit;
 import org.bukkit.Bukkit;
@@ -18,7 +19,9 @@ public final class PlayTime extends JavaPlugin {
         // Plugin shutdown logic
     }
 
-    private void registerCommands() {}
+    private void registerCommands() {
+        getCommand("playtime").setExecutor(new playTimeCommand());
+    }
 
     private void registerEvents() {
         Bukkit.getPluginManager().registerEvents(new onPlayerJoin(), this);
