@@ -1,0 +1,4 @@
+name: playTime
+version: '${project.version}'
+main: de.pertooo.playtime.PlayTime
+api-version: '1.21'
