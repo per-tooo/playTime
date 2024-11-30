@@ -1,6 +1,9 @@
 package de.pertooo.playtime.commands;
 
+import de.pertooo.playtime.commands.playtime.ChatOutput;
+import de.pertooo.playtime.commands.playtime.Help;
 import de.pertooo.playtime.utilities.Files;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -19,21 +22,18 @@ public class playTimeCommand implements CommandExecutor {
         Player player = (Player) commandSender;
         UUID uuid = player.getUniqueId();
 
-        Files files = new Files(uuid.toString());
-        FileConfiguration cfg = files.getFileConfiguration();
+        if (strings.length == 0) {
+            ChatOutput.playtimeOutput(player);
+        }
+        if (strings.length == 1) {
+            // /playtime <arg>
 
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        Long lastJoin = cfg.getLong("stats.lastJoin");
-        Long playtime = cfg.getLong("stats.playtime");
-        playtime = playtime + (timestamp.getTime() - lastJoin);
+            if (strings[0].equalsIgnoreCase("help"))
+                Help.helpOutput(player);
 
-        player.sendMessage(
-                "§7--------------------[§b§lPlayTime§7]--------------------",
-                "§7These are your stats",
-                "   §7Time played: §b" + playtime,
-                "   §7Times Joined: §b" + cfg.getInt("stats.timesJoined"),
-                "§7--------------------------------------------------"
-        );
+            if (strings[0].equalsIgnoreCase("server"))
+                ChatOutput.playtimeOutput(player, Bukkit.getPlayer(strings[0]).getUniqueId().toString());
+        }
 
         return false;
     }

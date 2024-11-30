@@ -32,5 +32,6 @@ public class onPlayerJoin implements Listener {
             );
             cfg.set("stats.lastJoin", Long.toString(timestamp.getTime()));
         }
+        files.saveFile();
     }
 }

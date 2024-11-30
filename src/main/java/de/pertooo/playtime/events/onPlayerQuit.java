@@ -24,5 +24,7 @@ public class onPlayerQuit implements Listener {
         Long playtime = cfg.getLong("stats.playtime");
         playtime = playtime + (timestamp.getTime() - lastJoin);
         cfg.set("stats.playtime", Long.toString(playtime));
+
+        files.saveFile();
     }
 }
