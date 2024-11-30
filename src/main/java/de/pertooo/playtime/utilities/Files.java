@@ -16,7 +16,7 @@ public class Files {
         this.fileConfiguration = YamlConfiguration.loadConfiguration(file);
     }
 
-    public FileConfiguration getFileConfiguration() { return this.getFileConfiguration(); }
+    public FileConfiguration getFileConfiguration() { return this.fileConfiguration; }
 
     public boolean fileExists() { return this.file.isFile() && !this.file.isDirectory(); }
 

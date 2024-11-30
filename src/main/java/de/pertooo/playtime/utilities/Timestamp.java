@@ -2,6 +2,7 @@ package de.pertooo.playtime.utilities;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Timestamp {
     public static Long getCurrentTimeStamp() {
@@ -9,6 +10,8 @@ public class Timestamp {
     }
 
     public static String parseTimestamp(Long timeInMilliseconds) {
-        return new SimpleDateFormat("HH:mm:ss").format(new Date(timeInMilliseconds));
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss");
+        simpleDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return simpleDateFormat.format(new Date(timeInMilliseconds));
     }
 }

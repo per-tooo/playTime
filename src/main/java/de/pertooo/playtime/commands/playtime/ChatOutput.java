@@ -6,6 +6,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
+import java.util.Arrays;
+import java.util.UUID;
+
 public class ChatOutput {
     public static void playtimeOutput(Player player) {
         Files files = new Files(player.getUniqueId().toString());
@@ -34,7 +37,7 @@ public class ChatOutput {
 
         player.sendMessage(
                 "",
-                "§7These are " + Bukkit.getPlayer(targetUUID).getName() + "'s stats",
+                "§7These are " + Bukkit.getPlayer(UUID.fromString(targetUUID)).getName() + "'s stats",
                 "   §7Time played: §b" + Timestamp.parseTimestamp(playtime),
                 "   §7Times Joined: §b" + cfg.getInt("stats.timesJoined"),
                 ""

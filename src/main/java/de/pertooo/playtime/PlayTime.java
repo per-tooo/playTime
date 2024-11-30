@@ -17,9 +17,12 @@ public final class PlayTime extends JavaPlugin {
     public void onEnable() {
         // Plugin startup logic
         if (this.files.fileExists())
-            this.cfg.set("stats.uptime", Integer.toString(0));
-        this.cfg.set("stats.lastStart", Long.toString(Timestamp.getCurrentTimeStamp()));
+            this.cfg.set("stats.uptime", 0);
+        this.cfg.set("stats.lastStart", Timestamp.getCurrentTimeStamp());
         this.files.saveFile();
+
+        registerCommands();
+        registerEvents();
     }
 
     @Override
@@ -27,7 +30,7 @@ public final class PlayTime extends JavaPlugin {
         // Plugin shutdown logic
         Long lastStart = this.cfg.getLong("stats.lastStart");
         Long timestamp = Timestamp.getCurrentTimeStamp();
-        this.cfg.set("stats.uptime", Long.toString(timestamp - lastStart));
+        this.cfg.set("stats.uptime", timestamp - lastStart);
         this.files.saveFile();
     }
 

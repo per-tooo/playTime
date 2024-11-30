@@ -28,13 +28,18 @@ public class playTimeCommand implements CommandExecutor {
         if (strings.length == 1) {
             // /playtime <arg>
 
-            if (strings[0].equalsIgnoreCase("help"))
+            if (strings[0].equalsIgnoreCase("help")) {
                 Help.helpOutput(player);
+                return true;
+            }
 
-            if (strings[0].equalsIgnoreCase("server"))
-                ChatOutput.playtimeOutput(player, Bukkit.getPlayer(strings[0]).getUniqueId().toString());
+            if (strings[0].equalsIgnoreCase("server")) {
+                ChatOutput.serverOutput(player);
+                return true;
+            }
+
+            ChatOutput.playtimeOutput(player, Bukkit.getPlayer(strings[0]).getUniqueId().toString());
         }
-
         return false;
     }
 }
