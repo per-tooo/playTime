@@ -22,23 +22,27 @@ public class playTimeCommand implements CommandExecutor {
         Player player = (Player) commandSender;
         UUID uuid = player.getUniqueId();
 
-        if (strings.length == 0) {
-            ChatOutput.playtimeOutput(player);
-        }
+        if (strings.length == 0)
+            if (player.hasPermission("playtime.view.self"))
+                ChatOutput.playtimeOutput(player);
+
         if (strings.length == 1) {
             // /playtime <arg>
 
-            if (strings[0].equalsIgnoreCase("help")) {
-                Help.helpOutput(player);
-                return true;
-            }
+            if (strings[0].equalsIgnoreCase("help"))
+                if (player.hasPermission("playtime.help")) {
+                    Help.helpOutput(player);
+                    return true;
+                }
 
-            if (strings[0].equalsIgnoreCase("server")) {
-                ChatOutput.serverOutput(player);
-                return true;
-            }
+            if (strings[0].equalsIgnoreCase("server"))
+                if (player.hasPermission("playtime.server")) {
+                    ChatOutput.serverOutput(player);
+                    return true;
+                }
 
-            ChatOutput.playtimeOutput(player, Bukkit.getPlayer(strings[0]).getUniqueId().toString());
+            if (player.hasPermission("playtime.view.others"))
+                ChatOutput.playtimeOutput(player, Bukkit.getPlayer(strings[0]).getUniqueId().toString());
         }
         return false;
     }
